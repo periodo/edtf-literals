@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Extended Date/Time Format (EDTF) concepts</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    
+    <link rel="stylesheet" type="text/css" href="style.css">
+    
+    <script type="application/ld+json">
+      [
+  {
+    "@id": "https://periodo.github.io/edtf-ontology/edtfo.ttl",
+    "@type": [
+      "https://schema.org/DefinedTermSet"
+    ],
+    "https://schema.org/codeRepository": [
+      {
+        "@id": "https://github.com/periodo/edtf-ontology"
+      }
+    ],
+    "https://schema.org/description": [
+      {
+        "@value": "<p>This is a draft ontology of concepts for\nexpressing <a href=\"https://www.loc.gov/standards/datetime/\">Extended Date/Time Format\n(EDTF)</a> constructs using the\n<a href=\"https://www.w3.org/TR/owl-time/\">Time Ontology in OWL</a>. The goal is\nto support translation of EDTF strings into structured descriptions\nthat can be queried and reasoned about using standard RDF/OWL tools.</p>\n<p>Please post questions or feedback at\n<a href=\"https://github.com/periodo/edtf-ontology/discussions\">https://github.com/periodo/edtf-ontology/discussions</a>.</p>"
+      }
+    ],
+    "https://schema.org/license": [
+      {
+        "@id": "http://creativecommons.org/publicdomain/mark/1.0/"
+      }
+    ],
+    "https://schema.org/name": [
+      {
+        "@value": "Extended Date/Time Format (EDTF) concepts"
+      }
+    ]
+  }
+]
+    </script>
+</head>
+<body>
+  <div id="pylode">made by <a href="http://github.com/rdflib/pyLODE">
+    <span style="color:#329545;">p</span><span style="color:#f9cb33;">y</span>LODE</a>
+    <span style="font-size:smaller;">2.8.6</span>
+  </div>
+  <h1>Extended Date/Time Format (EDTF) concepts</h1>
+<section id="metadata">
+    <h2 style="display:none;">Metadata</h2>
+    <dl>
+        <dt>URI</dt>
+        <dd><code>https://periodo.github.io/edtf-ontology/edtfo.ttl</code></dd>
+        <dt><a class="proplink" href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/creator">Creator</a>(s)</dt>
+        <dd>
+            
+    <a href="https://orcid.org/0000-0002-5486-159X">Ryan Shaw</a>
+    <a href="https://orcid.org/0000-0002-5486-159X"><svg width="15px" height="15px" viewBox="0 0 72 72" version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Orcid logo</title>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="hero" transform="translate(-924.000000, -72.000000)" fill-rule="nonzero">
+            <g id="Group-4">
+                <g id="vector_iD_icon" transform="translate(924.000000, 72.000000)">
+                    <path d="M72,36 C72,55.884375 55.884375,72 36,72 C16.115625,72 0,55.884375 0,36 C0,16.115625 16.115625,0 36,0 C55.884375,0 72,16.115625 72,36 Z" id="Path" fill="#A6CE39"></path>
+                    <g id="Group" transform="translate(18.868966, 12.910345)" fill="#FFFFFF">
+                        <polygon id="Path" points="5.03734929 39.1250878 0.695429861 39.1250878 0.695429861 9.14431787 5.03734929 9.14431787 5.03734929 22.6930505 5.03734929 39.1250878"></polygon>
+                        <path d="M11.409257,9.14431787 L23.1380784,9.14431787 C34.303014,9.14431787 39.2088191,17.0664074 39.2088191,24.1486995 C39.2088191,31.846843 33.1470485,39.1530811 23.1944669,39.1530811 L11.409257,39.1530811 L11.409257,9.14431787 Z M15.7511765,35.2620194 L22.6587756,35.2620194 C32.49858,35.2620194 34.7541226,27.8438084 34.7541226,24.1486995 C34.7541226,18.1301509 30.8915059,13.0353795 22.4332213,13.0353795 L15.7511765,13.0353795 L15.7511765,35.2620194 Z" id="Shape"></path>
+                        <path d="M5.71401206,2.90182329 C5.71401206,4.441452 4.44526937,5.72914146 2.86638958,5.72914146 C1.28750978,5.72914146 0.0187670918,4.441452 0.0187670918,2.90182329 C0.0187670918,1.33420133 1.28750978,0.0745051096 2.86638958,0.0745051096 C4.44526937,0.0745051096 5.71401206,1.36219458 5.71401206,2.90182329 Z" id="Path"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg></a>
+    (<a href="mailto:ryanshaw@unc.edu">ryanshaw@unc.edu</a>) of 
+    <a href="https://perio.do/">PeriodO</a><br/>
+        </dd>
+        <dt><a class="proplink" href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/modified">Modified</a></dt>
+        <dd>2021-04-19</dd>
+        <dt>Version Information</dt>
+        <dd>draft</dd>
+        <dt>Imports</dt>
+        <dd>
+            <a href="http://www.w3.org/2006/time">http://www.w3.org/2006/time</a><br/>
+        </dd>
+        <dt>License</dt>
+        <dd><a href="http://creativecommons.org/publicdomain/mark/1.0/">http://creativecommons.org/publicdomain/mark/1.0/</a></dd>
+        <dt>Ontology RDF</dt>
+        <dd><a href="edtfo.ttl">RDF (turtle)</a></dd>
+        <dt>Code Repository</dt>
+        <dd><a href="https://github.com/periodo/edtf-ontology">https://github.com/periodo/edtf-ontology</a></dd>
+    </dl>
+    <h2>Description</h2>
+    <div id="description">
+        <p>This is a draft ontology of concepts for
+expressing <a href="https://www.loc.gov/standards/datetime/">Extended Date/Time Format
+(EDTF)</a> constructs using the
+<a href="https://www.w3.org/TR/owl-time/">Time Ontology in OWL</a>. The goal is
+to support translation of EDTF strings into structured descriptions
+that can be queried and reasoned about using standard RDF/OWL tools.</p>
+<p>Please post questions or feedback at
+<a href="https://github.com/periodo/edtf-ontology/discussions">https://github.com/periodo/edtf-ontology/discussions</a>.</p>
+    </div>
+</section>
+<section id="toc">
+    <h2>Table of Contents</h2>
+    <ol>
+        <li><a href="#classes">Classes</a></li>
+        <li><a href="#objectproperties">Object Properties</a></li>
+        <li><a href="#datatypeproperties">Datatype Properties</a></li>
+        <li><a href="#annotationproperties">Annotation Properties</a></li>
+        <li><a href="#namedindividuals">Named Individuals</a></li>
+        <li><a href="#namespaces">Namespaces</a></li>
+        <li><a href="#legend">Legend</a></li>
+    </ol>
+</section>
+<section id="overview">
+    <h2>Overview</h2>
+    <div class="figure">
+        <img src="edtfo.svg" alt="Ontology diagram">
+        <div class="caption"><strong>Figure 1:</strong> Ontology overview</div>
+    </div>
+</section>
+  <section id="classes">
+    <h2>Classes <span style="float:right; font-size:smaller;"><a href="">&uparrow;</a></span></h2>
+    <ul class="hlist">
+        <li><a href="#Approximatestatement">Approximate statement</a></li>
+        <li><a href="#Centurydescription">Century description</a></li>
+        <li><a href="#Decadedescription">Decade description</a></li>
+        <li><a href="#Millenniumdescription">Millennium description</a></li>
+        <li><a href="#Openbeginninginterval">Open beginning interval</a></li>
+        <li><a href="#Openendinterval">Open end interval</a></li>
+        <li><a href="#Quadrimesterofyear">Quadrimester of year</a></li>
+        <li><a href="#Qualifiedstatement">Qualified statement</a></li>
+        <li><a href="#Quarterofyear">Quarter of year</a></li>
+        <li><a href="#Seasonofyear">Season of year</a></li>
+        <li><a href="#Semestralofyear">Semestral of year</a></li>
+        <li><a href="#Sub-yeardatedescription">Sub-year date description</a></li>
+        <li><a href="#Subdivisionofyear">Subdivision of year</a></li>
+        <li><a href="#Super-yeardatedescription">Super-year date description</a></li>
+        <li><a href="#Uncertainstatement">Uncertain statement</a></li>
+    </ul>
+    <div class="entity class" id="Approximatestatement">
+        <h3>Approximate statement<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://periodo.github.io/edtf-ontology/edtfo.ttl#ApproximateStatement</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>An approximate statement</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Example</th>
+                <td>
+                    <pre>
+# approximately June 2004
+
+ex:when a time:Instant ;
+  time:inDateTime ex:2004_06
+  .
+
+ex:2004_06 a time:DateTimeDescription ;
+  time:unitType time:unitMonth ;
+  time:year 2004 ;
+  time:month 6
+  .
+
+ex:temporalPositionStatement a edtfo:ApproximateStatement ;
+  rdf:subject ex:when ;
+  rdf:predicate time:inDateTime ;
+  rdf:object ex:2004_06
+  .
+                    </pre>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="#Qualifiedstatement">QualifiedStatement</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Centurydescription">
+        <h3>Century description<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://periodo.github.io/edtf-ontology/edtfo.ttl#CenturyDescription</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Description of date and time structured with a
+  separate value for specifying the century.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Usage Note</th>
+                <td>
+                    <p>Since specifying the decade also indirectly
+  specifies the century, and specifying the century also indirectly
+  specifies the millennium, this class is disjoint with
+  <code>edtfo:DecadeDescription</code> and <code>edtfo:MillenniumDescription</code>.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Example</th>
+                <td>
+                    <pre>
+# some year in the 20th century
+
+ex:when a time:Instant ;
+  time:inDateTime  [
+    a edtfo:CenturyDescription ;
+    time:unitType time:unitYear ;
+    edtfo:century 20
+    ]
+  .
+                    </pre>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="#Super-yeardatedescription">SuperYearDateTimeDescription</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="#century">century</a><sup class="sup-dp" title="datatype property">dp</sup> <span class="cardinality">max</span> 1<br/>
+                </td>
+            </tr>
+            <tr>
+                <th>In domain of</th>
+                <td>
+                    <a href="#century">century</a><sup class="sup-dp" title="datatype property">dp</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Decadedescription">
+        <h3>Decade description<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://periodo.github.io/edtf-ontology/edtfo.ttl#DecadeDescription</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Description of date and time structured with a
+  separate value for specifying the decade.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Usage Note</th>
+                <td>
+                    <p>Since specifying the decade also indirectly
+  specifies the century and millennium, this class is disjoint with
+  <code>edtfo:CenturyDescription</code> and <code>edtfo:MillenniumDescription</code>.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Example</th>
+                <td>
+                    <pre>
+# some year in the 2010s
+
+ex:when a time:Instant ;
+  time:inDateTime  [
+    a edtfo:DecadeDescription ;
+    time:unitType time:unitYear ;
+    edtfo:decade 201
+    ]
+  .
+                    </pre>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="#Super-yeardatedescription">SuperYearDateTimeDescription</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="#decade">decade</a><sup class="sup-dp" title="datatype property">dp</sup> <span class="cardinality">max</span> 1<br/>
+                </td>
+            </tr>
+            <tr>
+                <th>In domain of</th>
+                <td>
+                    <a href="#decade">decade</a><sup class="sup-dp" title="datatype property">dp</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Millenniumdescription">
+        <h3>Millennium description<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://periodo.github.io/edtf-ontology/edtfo.ttl#MillenniumDescription</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Description of date and time structured with a
+  separate value for specifying the millennium.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Usage Note</th>
+                <td>
+                    <p>Since specifying the decade or the century also
+  indirectly specifies the millennium, this class is disjoint with
+  <code>edtfo:DecadeDescription</code> and <code>edtfo:CenturyDescription</code>.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Example</th>
+                <td>
+                    <pre>
+# some month in the 1st millennium
+
+ex:when a time:Instant ;
+  time:inDateTime  [
+    a edtfo:MillenniumDescription ;
+    time:unitType time:unitMonth ;
+    edtfo:millennium 1
+    ]
+  .
+                    </pre>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="#Super-yeardatedescription">SuperYearDateTimeDescription</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="#millennium">millennium</a><sup class="sup-dp" title="datatype property">dp</sup> <span class="cardinality">max</span> 1<br/>
+                </td>
+            </tr>
+            <tr>
+                <th>In domain of</th>
+                <td>
+                    <a href="#millennium">millennium</a><sup class="sup-dp" title="datatype property">dp</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Openbeginninginterval">
+        <h3>Open beginning interval<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://periodo.github.io/edtf-ontology/edtfo.ttl#OpenBeginningInterval</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A temporal entity with non-zero extent or duration
+  and for which the value of the beginning is unspecified (perhaps
+  because it does not exist, but not because it is unknown)</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Example</th>
+                <td>
+                    <pre>
+# interval ending April 12th 1985; beginning unspecified
+
+ex:when a edtfo:OpenBeginningInterval ;
+  time:hasEnd [
+    a time:Instant ;
+    time:inDateTime [
+      a time:DateTimeDescription ;
+      time:unitType time:unitDay ;
+      time:year 1985 ;
+      time:month 4 ;
+      time:day 12
+      ]
+    ]
+  .
+                    </pre>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="http://www.w3.org/2006/time#ProperInterval">time:ProperInterval</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="http://www.w3.org/2006/time#hasBeginning">time:hasBeginning</a> <span class="cardinality">exactly</span> 0<br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Openendinterval">
+        <h3>Open end interval<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://periodo.github.io/edtf-ontology/edtfo.ttl#OpenEndInterval</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A temporal entity with non-zero extent or duration
+  and for which the value of the end is unspecified (perhaps because
+  it does not exist, but not because it is unknown)</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Example</th>
+                <td>
+                    <pre>
+# interval starting April 12th 1985; end unspecified
+
+ex:when a edtfo:OpenEndInterval ;
+  time:hasBeginning [
+    a time:Instant ;
+    time:inDateTime [
+      a time:DateTimeDescription ;
+      time:unitType time:unitDay ;
+      time:year 1985 ;
+      time:month 4 ;
+      time:day 12
+      ]
+    ]
+  .
+                    </pre>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="http://www.w3.org/2006/time#ProperInterval">time:ProperInterval</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="http://www.w3.org/2006/time#hasEnd">time:hasEnd</a> <span class="cardinality">exactly</span> 0<br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Quadrimesterofyear">
+        <h3>Quadrimester of year<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://periodo.github.io/edtf-ontology/edtfo.ttl#Quadrimester</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A quadrimester (four-month subdivision) of the year</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="#Subdivisionofyear">YearSubdivision</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="http://www.w3.org/2006/time#unitType">time:unitType</a> <span class="cardinality">value</span> <a href="https://periodo.github.io/edtf-ontology/edtfo.ttl#unitQuadrimester">unitQuadrimester</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Qualifiedstatement">
+        <h3>Qualified statement<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://periodo.github.io/edtf-ontology/edtfo.ttl#QualifiedStatement</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A qualified (e.g. uncertain or approximate) statement</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement">rdf:Statement</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="#Approximatestatement">ApproximateStatement</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="#Uncertainstatement">UncertainStatement</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Quarterofyear">
+        <h3>Quarter of year<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://periodo.github.io/edtf-ontology/edtfo.ttl#Quarter</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A quarter of the year</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="#Subdivisionofyear">YearSubdivision</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="http://www.w3.org/2006/time#unitType">time:unitType</a> <span class="cardinality">value</span> <a href="https://periodo.github.io/edtf-ontology/edtfo.ttl#unitQuarter">unitQuarter</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Seasonofyear">
+        <h3>Season of year<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://periodo.github.io/edtf-ontology/edtfo.ttl#Season</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A season of the year</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="#Subdivisionofyear">YearSubdivision</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="http://www.w3.org/2006/time#unitType">time:unitType</a> <span class="cardinality">value</span> <a href="https://periodo.github.io/edtf-ontology/edtfo.ttl#unitSeason">unitSeason</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Semestralofyear">
+        <h3>Semestral of year<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://periodo.github.io/edtf-ontology/edtfo.ttl#Semestral</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A semestral (six-month subdivision) of the year</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="#Subdivisionofyear">YearSubdivision</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="http://www.w3.org/2006/time#unitType">time:unitType</a> <span class="cardinality">value</span> <a href="https://periodo.github.io/edtf-ontology/edtfo.ttl#unitSemestral">unitSemestral</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Sub-yeardatedescription">
+        <h3>Sub-year date description<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://periodo.github.io/edtf-ontology/edtfo.ttl#SubYearDateTimeDescription</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Description of date and time structured with a
+separate value for a sub-year grouping such as a season or
+quarter. The temporal reference system is fixed to Gregorian
+Calendar.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Example</th>
+                <td>
+                    <pre>
+# spring of 2001
+
+ex:when a time:Instant ;
+  time:inDateTime [
+    a edtfo:SubYearDateTimeDescription ;
+    time:unitType edtfo:unitSeason ;
+    edtfo:yearSubdivision edtfo:Spring ;
+    time:year 2001
+    ]
+  .
+                    </pre>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="http://www.w3.org/2006/time#DateTimeDescription">time:DateTimeDescription</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="#yearsubdivision">yearSubdivision</a><sup class="sup-op" title="object property">op</sup> <span class="cardinality">max</span> 1<br/>
+                </td>
+            </tr>
+            <tr>
+                <th>In domain of</th>
+                <td>
+                    <a href="#yearsubdivision">yearSubdivision</a><sup class="sup-op" title="object property">op</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Super-yeardatedescription">
+        <h3>Super-year date description<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://periodo.github.io/edtf-ontology/edtfo.ttl#SuperYearDateTimeDescription</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Description of date and time structured with a
+  separate value for specifying a temporal position at a precision
+  coarser than a year (e.g. decade or century or millennium). The
+  temporal reference system is fixed to Gregorian Calendar.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Usage Note</th>
+                <td>
+                    <p>Since it only makes sense to specify a temporal
+  position at a precision coarser than a year if the exact year is
+  <em>not</em> specified, super-year datetime descriptions must not have any
+  <code>time:year</code> properties.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="http://www.w3.org/2006/time#DateTimeDescription">time:DateTimeDescription</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="http://www.w3.org/2006/time#year">time:year</a> <span class="cardinality">exactly</span> 0<br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="#Centurydescription">CenturyDescription</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="#Decadedescription">DecadeDescription</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="#Millenniumdescription">MillenniumDescription</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Uncertainstatement">
+        <h3>Uncertain statement<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://periodo.github.io/edtf-ontology/edtfo.ttl#UncertainStatement</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>An uncertain statement</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Example</th>
+                <td>
+                    <pre>
+# possibly but not certainly 1984
+
+ex:when a time:Instant ;
+  time:inDateTime ex:1984
+  .
+
+ex:1984 a time:DateTimeDescription ;
+  time:unitType time:unitYear ;
+  time:year 1984
+  .
+
+ex:temporalPositionStatement a edtfo:UncertainStatement ;
+  rdf:subject ex:when ;
+  rdf:predicate time:inDateTime ;
+  rdf:object ex:1984
+  .
+                    </pre>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="#Qualifiedstatement">QualifiedStatement</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Subdivisionofyear">
+        <h3>Subdivision of year<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://periodo.github.io/edtf-ontology/edtfo.ttl#YearSubdivision</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A subdivision of the year</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="http://www.w3.org/2002/07/owl#Thing">owl:Thing</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="#Quarterofyear">Quarter</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="#Seasonofyear">Season</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="#Semestralofyear">Semestral</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="#Quadrimesterofyear">Quadrimester</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>In range of</th>
+                <td>
+                    <a href="#yearsubdivision">yearSubdivision</a><sup class="sup-op" title="object property">op</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+</section>
+<section id="objectproperties">
+    <h2>Object Properties <span style="float:right; font-size:smaller;"><a href="">&uparrow;</a></span></h2>
+    <ul class="hlist">
+        <li><a href="#yearsubdivision">year subdivision</a></li>
+    </ul>
+    <div class="entity property" id="yearsubdivision">
+        <h3>year subdivision<sup title="object property" class="sup-op">op</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://periodo.github.io/edtf-ontology/edtfo.ttl#yearSubdivision</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    The subdivision of the year,
+whose value is a member of the class `edtfo:YearSubdivision`
+                </td>
+            </tr>
+            <tr>
+                <th>Example</th>
+                <td>
+                    <pre>
+# spring  of 2021
+
+:when a time:Instant ;
+  time:inDateTime [
+    a edtfo:SubYearDateTimeDescription ;
+    time:unitType edtfo:unitSeason ;
+    edtfo:yearSubdivision edtfo:Spring ;
+    time:year 2001
+    ]
+  .
+                    </pre>
+                </td>
+            </tr>
+            <tr>
+                <th>Domain(s)</th>
+                <td>
+                    <a href="#Sub-yeardatedescription">SubYearDateTimeDescription</a><sup class="sup-c" title="class">c</sup>
+                </td>
+            </tr>
+            <tr>
+                <th>Range(s)</th>
+                <td>
+                    <a href="#Subdivisionofyear">YearSubdivision</a><sup class="sup-c" title="class">c</sup>
+                </td>
+            </tr>
+        </table>
+    </div>
+</section>
+
+<section id="datatypeproperties">
+    <h2>Datatype Properties <span style="float:right; font-size:smaller;"><a href="">&uparrow;</a></span></h2>
+    <ul class="hlist">
+        <li><a href="#century">century</a></li>
+        <li><a href="#decade">decade</a></li>
+        <li><a href="#hasEDTFdatetimedescription">has EDTF datetime description</a></li>
+        <li><a href="#hasEDTFdatetimesetdescription">has EDTF datetime set description</a></li>
+        <li><a href="#inEDTFdatetime">in EDTF datetime</a></li>
+        <li><a href="#millennium">millennium</a></li>
+    </ul>
+    <div class="entity property" id="century">
+        <h3>century<sup title="datatype property" class="sup-dp">dp</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://periodo.github.io/edtf-ontology/edtfo.ttl#century</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    Century position in the Gregorian calendar;
+e.g. `19` is the century starting with 1900
+                </td>
+            </tr>
+            <tr>
+                <th>Example</th>
+                <td>
+                    <pre>
+# some year in the 20th century
+
+ex:when a time:Instant ;
+  time:inDateTime  [
+    a edtfo:CenturyDescription ;
+    time:unitType time:unitYear ;
+    edtfo:century 20
+    ]
+  .
+                    </pre>
+                </td>
+            </tr>
+            <tr>
+                <th>Domain(s)</th>
+                <td>
+                    <a href="#Centurydescription">CenturyDescription</a><sup class="sup-c" title="class">c</sup>
+                </td>
+            </tr>
+            <tr>
+                <th>Range(s)</th>
+                <td>
+                    <a href="http://www.w3.org/2001/XMLSchema#integer">xsd:integer</a><sup class="sup-c" title="class">c</sup>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity property" id="decade">
+        <h3>decade<sup title="datatype property" class="sup-dp">dp</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://periodo.github.io/edtf-ontology/edtfo.ttl#decade</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    Decade position in the Gregorian calendar;
+e.g. `197` is the decade starting with 1970
+                </td>
+            </tr>
+            <tr>
+                <th>Example</th>
+                <td>
+                    <pre>
+# some year in the 2010s
+
+ex:when a time:Instant ;
+  time:inDateTime  [
+    a edtfo:DecadeDescription ;
+    time:unitType time:unitYear ;
+    edtfo:decade 201
+    ]
+  .
+                    </pre>
+                </td>
+            </tr>
+            <tr>
+                <th>Domain(s)</th>
+                <td>
+                    <a href="#Decadedescription">DecadeDescription</a><sup class="sup-c" title="class">c</sup>
+                </td>
+            </tr>
+            <tr>
+                <th>Range(s)</th>
+                <td>
+                    <a href="http://www.w3.org/2001/XMLSchema#integer">xsd:integer</a><sup class="sup-c" title="class">c</sup>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity property" id="hasEDTFdatetimedescription">
+        <h3>has EDTF datetime description<sup title="datatype property" class="sup-dp">dp</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://periodo.github.io/edtf-ontology/edtfo.ttl#hasEDTFDateTimeDescription</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    Value of an interval, expressed using EDTF
+                </td>
+            </tr>
+            <tr>
+                <th>Example</th>
+                <td>
+                    <pre>
+# June 2004 to August 2006
+
+:when a time:ProperInterval ;
+  edtfo:hasEDTFDateTimeDescription "2004-06/2006-08"
+  .
+                    </pre>
+                </td>
+            </tr>
+            <tr>
+                <th>Domain(s)</th>
+                <td>
+                    <a href="http://www.w3.org/2006/time#Interval">time:Interval</a><sup class="sup-c" title="class">c</sup>
+                </td>
+            </tr>
+            <tr>
+                <th>Range(s)</th>
+                <td>
+                    <a href="http://id.loc.gov/datatypes/edtf/EDTF">edtf:EDTF</a><sup class="sup-c" title="class">c</sup>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity property" id="hasEDTFdatetimesetdescription">
+        <h3>has EDTF datetime set description<sup title="datatype property" class="sup-dp">dp</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://periodo.github.io/edtf-ontology/edtfo.ttl#hasEDTFDateTimeSetDescription</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    Value of a set of instants, expressed using EDTF
+
+This property is intended for use with EDTF level 2 “all members of set”
+(curly brackets) notation. For “one of a set” expressions use
+`edtfo:inEDTFDateTime`.
+
+                </td>
+            </tr>
+            <tr>
+                <th>Example</th>
+                <td>
+                    <pre>
+# all of the years 1667, 1668, 1670, 1671, 1672
+
+:When a owl:Class ;
+  edtfo:hasEDTFDateTimeSetDescription "{1667,1668,1670..1672}"
+  .
+                    </pre>
+                </td>
+            </tr>
+            <tr>
+                <th>Domain(s)</th>
+                <td>
+                    <a href="http://www.w3.org/2002/07/owl#Class">owl:Class</a><sup class="sup-c" title="class">c</sup>
+                </td>
+            </tr>
+            <tr>
+                <th>Range(s)</th>
+                <td>
+                    <a href="http://id.loc.gov/datatypes/edtf/EDTF-level2">edtf:EDTF-level2</a><sup class="sup-c" title="class">c</sup>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity property" id="inEDTFdatetime">
+        <h3>in EDTF datetime<sup title="datatype property" class="sup-dp">dp</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://periodo.github.io/edtf-ontology/edtfo.ttl#inEDTFDateTime</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    Position of an instant, expressed using EDTF
+                </td>
+            </tr>
+            <tr>
+                <th>Example</th>
+                <td>
+                    <pre>
+# the calendar year 1985
+
+:when a time:Instant ;
+  edtfo:inEDTFDateTime "1985"
+  .
+                    </pre>
+                </td>
+            </tr>
+            <tr>
+                <th>Domain(s)</th>
+                <td>
+                    <a href="http://www.w3.org/2006/time#Instant">time:Instant</a><sup class="sup-c" title="class">c</sup>
+                </td>
+            </tr>
+            <tr>
+                <th>Range(s)</th>
+                <td>
+                    <a href="http://id.loc.gov/datatypes/edtf/EDTF">edtf:EDTF</a><sup class="sup-c" title="class">c</sup>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity property" id="millennium">
+        <h3>millennium<sup title="datatype property" class="sup-dp">dp</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://periodo.github.io/edtf-ontology/edtfo.ttl#millennium</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    Millennium position in the Gregorian calendar;
+e.g. `1` is the century starting with 1000
+                </td>
+            </tr>
+            <tr>
+                <th>Example</th>
+                <td>
+                    <pre>
+# some month in the 1st millennium
+
+ex:when a time:Instant ;
+  time:inDateTime  [
+    a edtfo:MillenniumDescription ;
+    time:unitType time:unitMonth ;
+    edtfo:millennium 1
+    ]
+  .
+                    </pre>
+                </td>
+            </tr>
+            <tr>
+                <th>Domain(s)</th>
+                <td>
+                    <a href="#Millenniumdescription">MillenniumDescription</a><sup class="sup-c" title="class">c</sup>
+                </td>
+            </tr>
+            <tr>
+                <th>Range(s)</th>
+                <td>
+                    <a href="http://www.w3.org/2001/XMLSchema#integer">xsd:integer</a><sup class="sup-c" title="class">c</sup>
+                </td>
+            </tr>
+        </table>
+    </div>
+</section>
+
+<section id="annotationproperties">
+    <h2>Annotation Properties <span style="float:right; font-size:smaller;"><a href="">&uparrow;</a></span></h2>
+    <ul class="hlist">
+        <li><a href="#creator">creator</a></li>
+        <li><a href="#description">description</a></li>
+        <li><a href="#license">license</a></li>
+        <li><a href="#modified">modified</a></li>
+        <li><a href="#title">title</a></li>
+        <li><a href="#preferredNamespacePrefix">preferredNamespacePrefix</a></li>
+        <li><a href="#preferredNamespaceUri">preferredNamespaceUri</a></li>
+        <li><a href="#codeRepository">codeRepository</a></li>
+    </ul>
+    <div class="entity property" id="creator">
+        <h3>creator<sup title="annotation property" class="sup-ap">ap</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>http://purl.org/dc/terms/creator</code></td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity property" id="description">
+        <h3>description<sup title="annotation property" class="sup-ap">ap</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>http://purl.org/dc/terms/description</code></td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity property" id="license">
+        <h3>license<sup title="annotation property" class="sup-ap">ap</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>http://purl.org/dc/terms/license</code></td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity property" id="modified">
+        <h3>modified<sup title="annotation property" class="sup-ap">ap</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>http://purl.org/dc/terms/modified</code></td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity property" id="title">
+        <h3>title<sup title="annotation property" class="sup-ap">ap</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>http://purl.org/dc/terms/title</code></td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity property" id="preferredNamespacePrefix">
+        <h3>preferredNamespacePrefix<sup title="annotation property" class="sup-ap">ap</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>http://purl.org/vocab/vann/preferredNamespacePrefix</code></td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity property" id="preferredNamespaceUri">
+        <h3>preferredNamespaceUri<sup title="annotation property" class="sup-ap">ap</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>http://purl.org/vocab/vann/preferredNamespaceUri</code></td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity property" id="codeRepository">
+        <h3>codeRepository<sup title="annotation property" class="sup-ap">ap</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://schema.org/codeRepository</code></td>
+            </tr>
+        </table>
+    </div>
+</section>
+
+  
+  <section id="namedindividuals">
+    <h2>Named Individuals <span style="float:right; font-size:smaller;"><a href="">&uparrow;</a></span></h2>
+    <ul class="hlist">
+        <li><a href="#Fall">Fall</a></li>
+        <li><a href="#Fall-NorthernHemisphere">Fall - Northern Hemisphere</a></li>
+        <li><a href="#Fall-SouthernHemisphere">Fall - Southern Hemisphere</a></li>
+        <li><a href="#Quadrimester(unitoftemporaldurationequivalentto4months)">Quadrimester (unit of temporal duration equivalent to 4 months)</a></li>
+        <li><a href="#Quadrimester1">Quadrimester 1</a></li>
+        <li><a href="#Quadrimester2">Quadrimester 2</a></li>
+        <li><a href="#Quadrimester3">Quadrimester 3</a></li>
+        <li><a href="#Quarter(unitoftemporaldurationequivalentto3months)">Quarter (unit of temporal duration equivalent to 3 months)</a></li>
+        <li><a href="#Quarter1">Quarter 1</a></li>
+        <li><a href="#Quarter2">Quarter 2</a></li>
+        <li><a href="#Quarter3">Quarter 3</a></li>
+        <li><a href="#Quarter4">Quarter 4</a></li>
+        <li><a href="#Season(unitoftemporalduration)">Season (unit of temporal duration)</a></li>
+        <li><a href="#Semestral(unitoftemporaldurationequivalentto6months)">Semestral (unit of temporal duration equivalent to 6 months)</a></li>
+        <li><a href="#Semestral1">Semestral 1</a></li>
+        <li><a href="#Semestral2">Semestral 2</a></li>
+        <li><a href="#Spring">Spring</a></li>
+        <li><a href="#Spring-NorthernHemisphere">Spring - Northern Hemisphere</a></li>
+        <li><a href="#Spring-SouthernHemisphere">Spring - Southern Hemisphere</a></li>
+        <li><a href="#Summer">Summer</a></li>
+        <li><a href="#Summer-NorthernHemisphere">Summer - Northern Hemisphere</a></li>
+        <li><a href="#Summer-SouthernHemisphere">Summer - Southern Hemisphere</a></li>
+        <li><a href="#Winter">Winter</a></li>
+        <li><a href="#Winter-NorthernHemisphere">Winter - Northern Hemisphere</a></li>
+        <li><a href="#Winter-SouthernHemisphere">Winter - Southern Hemisphere</a></li>
+    </ul>
+    <div class="entity named_individual" id="Fall">
+        <h3>Fall<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://periodo.github.io/edtf-ontology/edtfo.ttl#Fall
+                  
+                  </code>
+                </td>
+            </tr>
+            <dt>Classes(s)</dt>
+            <dd>
+                <a href="https://periodo.github.io/edtf-ontology/edtfo.ttl#Season">Season</a><br/>
+            </dd>
+        </table>
+    </div>
+    <div class="entity named_individual" id="Fall-NorthernHemisphere">
+        <h3>Fall - Northern Hemisphere<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://periodo.github.io/edtf-ontology/edtfo.ttl#FallNorthernHemisphere
+                  
+                  </code>
+                </td>
+            </tr>
+            <dt>Classes(s)</dt>
+            <dd>
+                <a href="https://periodo.github.io/edtf-ontology/edtfo.ttl#Season">Season</a><br/>
+            </dd>
+        </table>
+    </div>
+    <div class="entity named_individual" id="Fall-SouthernHemisphere">
+        <h3>Fall - Southern Hemisphere<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://periodo.github.io/edtf-ontology/edtfo.ttl#FallSouthernHemisphere
+                  
+                  </code>
+                </td>
+            </tr>
+            <dt>Classes(s)</dt>
+            <dd>
+                <a href="https://periodo.github.io/edtf-ontology/edtfo.ttl#Season">Season</a><br/>
+            </dd>
+        </table>
+    </div>
+    <div class="entity named_individual" id="Quadrimester1">
+        <h3>Quadrimester 1<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://periodo.github.io/edtf-ontology/edtfo.ttl#Quadrimester1
+                  
+                  </code>
+                </td>
+            </tr>
+            <dt>Classes(s)</dt>
+            <dd>
+                <a href="https://periodo.github.io/edtf-ontology/edtfo.ttl#Quadrimester">Quadrimester</a><br/>
+            </dd>
+        </table>
+    </div>
+    <div class="entity named_individual" id="Quadrimester2">
+        <h3>Quadrimester 2<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://periodo.github.io/edtf-ontology/edtfo.ttl#Quadrimester2
+                  
+                  </code>
+                </td>
+            </tr>
+            <dt>Classes(s)</dt>
+            <dd>
+                <a href="https://periodo.github.io/edtf-ontology/edtfo.ttl#Quadrimester">Quadrimester</a><br/>
+            </dd>
+        </table>
+    </div>
+    <div class="entity named_individual" id="Quadrimester3">
+        <h3>Quadrimester 3<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://periodo.github.io/edtf-ontology/edtfo.ttl#Quadrimester3
+                  
+                  </code>
+                </td>
+            </tr>
+            <dt>Classes(s)</dt>
+            <dd>
+                <a href="https://periodo.github.io/edtf-ontology/edtfo.ttl#Quadrimester">Quadrimester</a><br/>
+            </dd>
+        </table>
+    </div>
+    <div class="entity named_individual" id="Quarter1">
+        <h3>Quarter 1<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://periodo.github.io/edtf-ontology/edtfo.ttl#Quarter1
+                  
+                  </code>
+                </td>
+            </tr>
+            <dt>Classes(s)</dt>
+            <dd>
+                <a href="https://periodo.github.io/edtf-ontology/edtfo.ttl#Quarter">Quarter</a><br/>
+            </dd>
+        </table>
+    </div>
+    <div class="entity named_individual" id="Quarter2">
+        <h3>Quarter 2<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://periodo.github.io/edtf-ontology/edtfo.ttl#Quarter2
+                  
+                  </code>
+                </td>
+            </tr>
+            <dt>Classes(s)</dt>
+            <dd>
+                <a href="https://periodo.github.io/edtf-ontology/edtfo.ttl#Quarter">Quarter</a><br/>
+            </dd>
+        </table>
+    </div>
+    <div class="entity named_individual" id="Quarter3">
+        <h3>Quarter 3<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://periodo.github.io/edtf-ontology/edtfo.ttl#Quarter3
+                  
+                  </code>
+                </td>
+            </tr>
+            <dt>Classes(s)</dt>
+            <dd>
+                <a href="https://periodo.github.io/edtf-ontology/edtfo.ttl#Quarter">Quarter</a><br/>
+            </dd>
+        </table>
+    </div>
+    <div class="entity named_individual" id="Quarter4">
+        <h3>Quarter 4<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://periodo.github.io/edtf-ontology/edtfo.ttl#Quarter4
+                  
+                  </code>
+                </td>
+            </tr>
+            <dt>Classes(s)</dt>
+            <dd>
+                <a href="https://periodo.github.io/edtf-ontology/edtfo.ttl#Quarter">Quarter</a><br/>
+            </dd>
+        </table>
+    </div>
+    <div class="entity named_individual" id="Semestral1">
+        <h3>Semestral 1<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://periodo.github.io/edtf-ontology/edtfo.ttl#Semestral1
+                  
+                  </code>
+                </td>
+            </tr>
+            <dt>Classes(s)</dt>
+            <dd>
+                <a href="https://periodo.github.io/edtf-ontology/edtfo.ttl#Semestral">Semestral</a><br/>
+            </dd>
+        </table>
+    </div>
+    <div class="entity named_individual" id="Semestral2">
+        <h3>Semestral 2<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://periodo.github.io/edtf-ontology/edtfo.ttl#Semestral2
+                  
+                  </code>
+                </td>
+            </tr>
+            <dt>Classes(s)</dt>
+            <dd>
+                <a href="https://periodo.github.io/edtf-ontology/edtfo.ttl#Semestral">Semestral</a><br/>
+            </dd>
+        </table>
+    </div>
+    <div class="entity named_individual" id="Spring">
+        <h3>Spring<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://periodo.github.io/edtf-ontology/edtfo.ttl#Spring
+                  
+                  </code>
+                </td>
+            </tr>
+            <dt>Classes(s)</dt>
+            <dd>
+                <a href="https://periodo.github.io/edtf-ontology/edtfo.ttl#Season">Season</a><br/>
+            </dd>
+        </table>
+    </div>
+    <div class="entity named_individual" id="Spring-NorthernHemisphere">
+        <h3>Spring - Northern Hemisphere<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://periodo.github.io/edtf-ontology/edtfo.ttl#SpringNorthernHemisphere
+                  
+                  </code>
+                </td>
+            </tr>
+            <dt>Classes(s)</dt>
+            <dd>
+                <a href="https://periodo.github.io/edtf-ontology/edtfo.ttl#Season">Season</a><br/>
+            </dd>
+        </table>
+    </div>
+    <div class="entity named_individual" id="Spring-SouthernHemisphere">
+        <h3>Spring - Southern Hemisphere<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://periodo.github.io/edtf-ontology/edtfo.ttl#SpringSouthernHemisphere
+                  
+                  </code>
+                </td>
+            </tr>
+            <dt>Classes(s)</dt>
+            <dd>
+                <a href="https://periodo.github.io/edtf-ontology/edtfo.ttl#Season">Season</a><br/>
+            </dd>
+        </table>
+    </div>
+    <div class="entity named_individual" id="Summer">
+        <h3>Summer<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://periodo.github.io/edtf-ontology/edtfo.ttl#Summer
+                  
+                  </code>
+                </td>
+            </tr>
+            <dt>Classes(s)</dt>
+            <dd>
+                <a href="https://periodo.github.io/edtf-ontology/edtfo.ttl#Season">Season</a><br/>
+            </dd>
+        </table>
+    </div>
+    <div class="entity named_individual" id="Summer-NorthernHemisphere">
+        <h3>Summer - Northern Hemisphere<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://periodo.github.io/edtf-ontology/edtfo.ttl#SummerNorthernHemisphere
+                  
+                  </code>
+                </td>
+            </tr>
+            <dt>Classes(s)</dt>
+            <dd>
+                <a href="https://periodo.github.io/edtf-ontology/edtfo.ttl#Season">Season</a><br/>
+            </dd>
+        </table>
+    </div>
+    <div class="entity named_individual" id="Summer-SouthernHemisphere">
+        <h3>Summer - Southern Hemisphere<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://periodo.github.io/edtf-ontology/edtfo.ttl#SummerSouthernHemisphere
+                  
+                  </code>
+                </td>
+            </tr>
+            <dt>Classes(s)</dt>
+            <dd>
+                <a href="https://periodo.github.io/edtf-ontology/edtfo.ttl#Season">Season</a><br/>
+            </dd>
+        </table>
+    </div>
+    <div class="entity named_individual" id="Winter">
+        <h3>Winter<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://periodo.github.io/edtf-ontology/edtfo.ttl#Winter
+                  
+                  </code>
+                </td>
+            </tr>
+            <dt>Classes(s)</dt>
+            <dd>
+                <a href="https://periodo.github.io/edtf-ontology/edtfo.ttl#Season">Season</a><br/>
+            </dd>
+        </table>
+    </div>
+    <div class="entity named_individual" id="Winter-NorthernHemisphere">
+        <h3>Winter - Northern Hemisphere<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://periodo.github.io/edtf-ontology/edtfo.ttl#WinterNorthernHemisphere
+                  
+                  </code>
+                </td>
+            </tr>
+            <dt>Classes(s)</dt>
+            <dd>
+                <a href="https://periodo.github.io/edtf-ontology/edtfo.ttl#Season">Season</a><br/>
+            </dd>
+        </table>
+    </div>
+    <div class="entity named_individual" id="Winter-SouthernHemisphere">
+        <h3>Winter - Southern Hemisphere<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://periodo.github.io/edtf-ontology/edtfo.ttl#WinterSouthernHemisphere
+                  
+                  </code>
+                </td>
+            </tr>
+            <dt>Classes(s)</dt>
+            <dd>
+                <a href="https://periodo.github.io/edtf-ontology/edtfo.ttl#Season">Season</a><br/>
+            </dd>
+        </table>
+    </div>
+    <div class="entity named_individual" id="Quadrimester(unitoftemporaldurationequivalentto4months)">
+        <h3>Quadrimester (unit of temporal duration equivalent to 4 months)<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://periodo.github.io/edtf-ontology/edtfo.ttl#unitQuadrimester
+                  
+                  </code>
+                </td>
+            </tr>
+            <dt>Classes(s)</dt>
+            <dd>
+                <a href="http://www.w3.org/2006/time#TemporalUnit">time:TemporalUnit</a><br/>
+            </dd>
+        </table>
+    </div>
+    <div class="entity named_individual" id="Quarter(unitoftemporaldurationequivalentto3months)">
+        <h3>Quarter (unit of temporal duration equivalent to 3 months)<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://periodo.github.io/edtf-ontology/edtfo.ttl#unitQuarter
+                  
+                  </code>
+                </td>
+            </tr>
+            <dt>Classes(s)</dt>
+            <dd>
+                <a href="http://www.w3.org/2006/time#TemporalUnit">time:TemporalUnit</a><br/>
+            </dd>
+        </table>
+    </div>
+    <div class="entity named_individual" id="Season(unitoftemporalduration)">
+        <h3>Season (unit of temporal duration)<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://periodo.github.io/edtf-ontology/edtfo.ttl#unitSeason
+                  
+                  </code>
+                </td>
+            </tr>
+            <dt>Classes(s)</dt>
+            <dd>
+                <a href="http://www.w3.org/2006/time#TemporalUnit">time:TemporalUnit</a><br/>
+            </dd>
+        </table>
+    </div>
+    <div class="entity named_individual" id="Semestral(unitoftemporaldurationequivalentto6months)">
+        <h3>Semestral (unit of temporal duration equivalent to 6 months)<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://periodo.github.io/edtf-ontology/edtfo.ttl#unitSemestral
+                  
+                  </code>
+                </td>
+            </tr>
+            <dt>Classes(s)</dt>
+            <dd>
+                <a href="http://www.w3.org/2006/time#TemporalUnit">time:TemporalUnit</a><br/>
+            </dd>
+        </table>
+    </div>
+</section>
+  
+  <section id="namespaces">
+    <h2>Namespaces <span style="float:right; font-size:smaller;"><a href="">&uparrow;</a></span></h2>
+    <dl>
+        <dt>:</dt>
+        <dd><code>https://periodo.github.io/edtf-ontology/edtfo.ttl#</code></dd>
+        <dt>dct</dt>
+        <dd><code>http://purl.org/dc/terms/</code></dd>
+        <dt>edtf</dt>
+        <dd><code>http://id.loc.gov/datatypes/edtf/</code></dd>
+        <dt>greg</dt>
+        <dd><code>http://www.w3.org/ns/time/gregorian/</code></dd>
+        <dt>owl</dt>
+        <dd><code>http://www.w3.org/2002/07/owl#</code></dd>
+        <dt>prov</dt>
+        <dd><code>http://www.w3.org/ns/prov#</code></dd>
+        <dt>rdf</dt>
+        <dd><code>http://www.w3.org/1999/02/22-rdf-syntax-ns#</code></dd>
+        <dt>rdfs</dt>
+        <dd><code>http://www.w3.org/2000/01/rdf-schema#</code></dd>
+        <dt>sdo</dt>
+        <dd><code>https://schema.org/</code></dd>
+        <dt>skos</dt>
+        <dd><code>http://www.w3.org/2004/02/skos/core#</code></dd>
+        <dt>time</dt>
+        <dd><code>http://www.w3.org/2006/time#</code></dd>
+        <dt>vann</dt>
+        <dd><code>http://purl.org/vocab/vann/</code></dd>
+        <dt>xsd</dt>
+        <dd><code>http://www.w3.org/2001/XMLSchema#</code></dd>
+    </dl>
+</section>
+  <section id="legend">
+      <h2>Legend</h2>
+      <table class="entity">
+          <tr><td><sup class="sup-c" title="Classes">c</sup></td><td>Classes</td></tr>
+          <tr><td><sup class="sup-op" title="Object Properties">op</sup></td><td>Object Properties</td></tr>
+          <tr><td><sup class="sup-fp" title="Functional Properties">fp</sup></td><td>Functional Properties</td></tr>
+          <tr><td><sup class="sup-dp" title="Data Properties">dp</sup></td><td>Data Properties</td></tr>
+          <tr><td><sup class="sup-ap" title="Annotation Properties">dp</sup></td><td>Annotation Properties</td></tr>
+          <tr><td><sup class="sup-p" title="Properties">p</sup></td><td>Properties</td></tr>
+          <tr><td><sup class="sup-ni" title="Named Individuals">ni</sup></td><td>Named Individuals</td></tr>
+      </table>
+  </section>
+</body>
+</html>
